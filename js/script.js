@@ -18,7 +18,11 @@ Tyler Harper
    scoped to that function.
 ***/
 
+const studentElement = document.querySelectorAll('ul li');
+const studentList = document.querySelector('ul');
 
+const page = '';
+const pages = '';
 
 
 /***
@@ -36,15 +40,27 @@ Tyler Harper
        "invoke" the function
 ***/
 
+function showPage() {
+   //loop thru student elements and remove elements from page
+   for (i = 0; i < studentElement.length; i++)
+   studentElement[i].style.display = "none";
+   //do the math for the 10 students
+   for (i = 0; i < 10; i++)
+   studentElement[i].style.display = 'inherit';
+}
 
-
+//show the students list on the page
+showPage();
 
 /***
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
 ***/
 
-
+function appendPageLinks() {
+   //append students
+   //append number of correct buttons for length of pages
+}
 
 
 
