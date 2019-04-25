@@ -4,57 +4,34 @@ FSJS project 2 - List Filter and Pagination
 Tyler Harper
 ******************************************/
 
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
-
 const pageList = document.querySelectorAll('ul');
 const list = document.querySelectorAll('li');
-const page = 10;
 
-const numberOfPages = (Math.ceil(list.length/page));
+//set number of students to display per page
+const studentsPerPage = 10;
 
-const hideStudentList = (list) => {
+//setting the default page for page load
+const page = 1;
+
+//the math to figure out how many pages we are going to have
+const numberOfPages = (Math.ceil(list.length/studentsPerPage));
+
+
+//Function to show only 10 students 
+function showPage(list, page) {
+   //assign index of students
    for (let i = 0; i < list.length; i++) {
-      list[i].style.display = 'none';
-   }
-}
-const showStudentList = (page) => {
-   for (let i = 0; i < list.length; i++) {
-
-      if (i >= (page -1)*10 && i < page * 10) {
+      //show 10 students (using -1 for correction) using index 
+      if (i >= (page -1)*studentsPerPage && i < page * studentsPerPage) {
          list[i].style.display = '';
+      } else {
+         //hide the rest
+         list[i].style.display = 'none';
       }
    }
 }
 
-
-
-
-
-
-
-// function showPage(list, page) {
-
-//    //list all students assign index
-//    for (let i = 0; i < list.length; i++) {
-//       //show 10 students -1 for correction because using index not numbered
-//       if (i >= (page -1)*10 && i < page * 10) {
-//          list[i].style.display = '';
-//       } else {
-//          //hide the rest
-//          list[i].style.display = 'none';
-//       }
-//    }
-// }
-
-//start of appendPage Function
-function appendPageLinks(){
-   //the math to figure out how many pages we need
-
-   // //used to show the first 10 students on first load
-   // for (let i = 0; i < page; i++){
-   //    list[i].style.display = '';
-   // }
-
+function appendPageLinks(){   
    //need to create the container for our pagination lines--
    const pagination = document.createElement('div');
    const pageDiv = document.querySelector('body div');
@@ -64,6 +41,7 @@ function appendPageLinks(){
    const paginationList = document.createElement('ul');
       pagination.appendChild(paginationList);
    //-- to here
+
    //creates each button for the pagination
    for (let i = 0; i < numberOfPages; i += 1) {
       const pageElement = document.createElement('li');
@@ -75,7 +53,7 @@ function appendPageLinks(){
          //add the numbering system for each button
          pageLink.textContent = i+1;
 
-         //pageLink.classList.remove('active');
+         pageLink.classList.remove('active');
 
          // listening for a click on the buttons to rerun functions with the output of the page and list 
          pageLink.addEventListener("click", () => {
@@ -86,7 +64,7 @@ function appendPageLinks(){
 }   
 
 //needs to run to hide the excess on initial load
-//showPage(list, page);
+showPage(list, page);
 
 
 appendPageLinks();
@@ -96,7 +74,6 @@ function appendSearch() {
    const searchDiv = document.createElement('div');
    const searchAppend = searchDiv.append;
    searchDiv.className = "student-search";
-
 
    const searchInput = document.createElement("input");
    searchInput.type = "text";
@@ -129,11 +106,9 @@ searchContent.addEventListener('keyup', () => {
 
       if (list[i].innerHTML.indexOf(filter) > -1) {
          list[i].style.display = '';
-
       } else {
          list[i].style.display = 'none';
          searchResults.push(i);
-         
       }
 
    }
@@ -141,8 +116,4 @@ searchContent.addEventListener('keyup', () => {
 
 });
 
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
-hideStudentList(list);
-showStudentList(1);
+//showPage(list, page);
